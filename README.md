@@ -23,3 +23,12 @@ Entrada --> Processamento --> saida
 | = | Atribuir um valor | x = 10 | x = 10 | 
 | + | Somar | 10 + 5 | 15 |
 |+= | Somar e Atribuir | x += 5 | x = 15 |
+| - | Subtrair | 15 - 10 | 5 |
+| -= | Subtrair e Atribuir | x -= 10 | x = 5 |
+| * | Multiplicar | 5 * 4 | 20 | 
+| *= | Multiplicação e Atribuir | x *= 4 | x = 20 |
+| / | Dividir | 20 / 2 | 10 | 
+| /= | Dividir e Atribuir | x /= 2 | 10 | 
+| ++ | Somar 1 ao resultado | x++ | 11 |
+| -- | Subtrair 1 do resultado | x-- | 10|
+| % | Resto da Divisão | 9 % 3 | 0 | 
