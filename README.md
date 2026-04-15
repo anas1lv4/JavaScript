@@ -5,8 +5,6 @@ Repositorio usado para estudo de logica de programação com uso da linguagem JA
 ## Autor
 Ana silva 
 
-<<<<<<< HEAD
-=======
 ---
 ## variaveis
 variaveis são espaços na memoria do computador usados para guardar valores ao longo do programa
@@ -34,4 +32,20 @@ Entrada --> Processamento --> saida
 | ++ | Somar 1 ao resultado | x++ | 11 |
 | -- | Subtrair 1 do resultado | x-- | 10|
 | % | Resto da Divisão | 10 % 3 | 1 | 
->>>>>>> 7b9e695e677b16fddadfaa7b6c9508e57624a792
+
+## operadores lógicos 
+| operador | simbologia |
+|----------|------------|
+| AND | && |
+| OR | \|\| |
+| NOT | ! |
+
+## comparadores
+| comparador | significado | 
+|------------|-------------|
+| > | Maior que |
+| >= | Maior ou igual a |
+| < | Menor que |
+|<= | Menor ou igual a |
+| === | Identifico a |
+
