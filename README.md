@@ -49,3 +49,21 @@ Entrada --> Processamento --> saida
 |<= | Menor ou igual a |
 | === | Identifico a |
 
+---
+## Estruturas de controle
+### estruturas de controles condicionais 
+
+``` javascript
+if (condição)
+{
+ //condição verdadeira
+}
+
+if (condição){
+ //condição verdadeira
+} else{
+ //condição falsa
+}
+```
+
+
