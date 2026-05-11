@@ -7,14 +7,14 @@
 // importa pacote
 const prompt = require('prompt-sync')()
 
-// vsriaveis
+// variaveis
 let disciplina , nota1, nota2, media 
 
 console.clear()
 console.log("calculo da media de 2 notas")
 
 // entrada de dados
-disciplina = prompt("digite seu nome da disciplina: ")
+disciplina = (prompt("digite seu nome da disciplina: "))
 //console.log(disciplina)
 //console.log(typerof(disciplina))
 nota1 = Number(prompt("Digite a nota1:"))

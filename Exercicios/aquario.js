@@ -1,25 +1,19 @@
 /**
- * Cálculo do volume de um aquário
- * @author Ana silva
+ *  Cálculo do volume de um aquário:
+ * @author Rafaela Quintiliano
  */
 
+
 const prompt = require('prompt-sync')()
+//variaveis
+let comprimento, largura, altura
+console.log("Volume de um aquario")
 
-// variaveis
-let Comprimento, largura, altura, volume
+//entrada
+altura = Number(prompt("Digite a altura:     "))
+largura = Number(prompt("Digite a largura:    "))
+comprimento = Number(prompt("Digite o comprimento:    "))
 
-
-console.clear()
-console.log("calcular o volume e exibir o resultado em litros") 
-
-// entrada 
-comprimento = Number(prompt(" Digite o Comprimento em centimetros: "))
-largura = Number(prompt("Digite a largura: "))
-altura = Number(prompt("Digite a Altura: "))
-
-// processamento 
-volume = (comprimento * largura * altura) / 100
-
-// saida
-
-console.log(`Volume: ${volume.toFixed(1)}`)
+//processamento
+volume =  (comprimento * altura * largura)/1000
+console.log(`volume: ${volume}`)
