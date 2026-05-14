@@ -1,8 +1,7 @@
 /**
- *  Cálculo do volume de um aquário:
- * @author Rafaela Quintiliano
+ * 
+ * @author Ana silva
  */
-
 
 const prompt = require('prompt-sync')()
 //variaveis
