@@ -1,7 +1,7 @@
 /**
  * Sistema para gestão de academia
  * Estudo de array como estrutura de dados
- * @author Professor José de Assis
+ * @author Ana silva
  */
 
 //Importação de pacotes(
@@ -230,6 +230,55 @@ function editarAluno() {
     console.log("=== ALTERAR ALUNO ===")
     console.log("")
 
+    let buscaMatricula = Number(prompt("Digite a matrícula do aluno: "))
+
+    //buscar índice do aluno
+    let indice = alunos.findIndex((a) => {
+        return a[0] === buscaMatricula
+    })
+
+    console.log("")
+
+    //validar busca
+    if (indice === -1) {
+        console.log("Aluno não encontrado")
+    } else {
+        //dados atuais
+        console.log("Dados atuais:")
+        console.log("")
+        console.log(`Nome: ${alunos[indice][1]}`)
+        console.log(`Idade: ${alunos[indice][2]}`)
+        console.log(`Peso: ${alunos[indice][3]}`)
+        console.log(`Altura: ${alunos[indice][4]}`)
+        console.log(`VIP: ${alunos[indice][5]}`)
+        console.log("")
+
+        //novos dados
+        let novoNome = prompt("Novo nome: ")
+        let novaIdade = Number(prompt("Nova idade: "))
+        let novoPeso = Number(prompt("Novo peso: "))
+        let novaAltura = Number(prompt("Nova altura: "))
+
+        let novoVip = prompt("Aluno VIP? (s/n): ")
+
+        if (novoVip === "s") {
+            novoVip = true
+        } else {
+            novoVip = false
+        }
+
+        //alteração
+        alunos[indice][1] = novoNome
+        alunos[indice][2] = novaIdade
+        alunos[indice][3] = novoPeso
+        alunos[indice][4] = novaAltura
+        alunos[indice][5] = novoVip
+
+        console.log("")
+        console.log("Dados do aluno alterados com sucesso")
+    }
+
+    console.log("")
     prompt("ENTER...")
 }
 //CRUD - Update (fim) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -240,7 +289,48 @@ function excluirAluno() {
     console.clear()
     console.log("=== EXCLUIR ALUNO ===")
     console.log("")
+    let buscaMatricula = Number(prompt("Digite a matrícula do aluno: "))
 
+    //buscar índice do aluno
+    let indice = alunos.findIndex((a) => {
+        return a[0] === buscaMatricula
+    })
+
+    console.log("")
+
+    //validar busca
+    if (indice === -1) {
+
+        console.log("Aluno não encontrado")
+
+    } else {
+
+        //dados do aluno
+        console.log("Aluno encontrado:")
+        console.log("")
+
+        console.log(`Matrícula: ${alunos[indice][0]}`)
+        console.log(`Nome: ${alunos[indice][1]}`)
+        console.log(`Idade: ${alunos[indice][2]}`)
+        console.log(`Peso: ${alunos[indice][3]}`)
+        console.log(`Altura: ${alunos[indice][4]}`)
+        console.log(`VIP: ${alunos[indice][5]}`)
+        console.log("")
+
+        //confirmação
+        let confirmar = prompt("Confirmar exclusão? (s/n): ").toLowerCase()
+        if (confirmar === "s") {
+            //excluir aluno
+            delete alunos[indice]
+            console.log("")
+            console.log("Aluno excluído com sucesso!")
+        } else {
+            console.log("")
+            console.log("Exclusão cancelada")
+        }
+    }
+
+    console.log("")
     prompt("ENTER...")
 }
 //CRUD - Delete (fim) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -362,6 +452,27 @@ function gerarRelatorios() {
         console.log("=== ALUNOS VIP ===")
         console.log("")
 
+        //lógica principal
+        //filtrar todos os alunos VIP
+        let alunosVip = alunos.filter((a) => {
+            return a[5] === true
+        })
+
+        //validação
+        if (alunosVip.length === 0) {
+            console.log("Nenhum aluno VIP cadastrado")
+        } else {
+            //map "cabeçalho da tabela de alunos vip"
+            let listaVip = alunosVip.map((a) => {
+                return {
+                    Matrícula: a[0],
+                    Nome: a[1]
+                }
+            })
+            console.table(listaVip)
+        }
+
+        console.log("")
         prompt("ENTER...")
     }
 
@@ -371,6 +482,20 @@ function gerarRelatorios() {
         console.log("=== MÉDIA DE IDADES ===")
         console.log("")
 
+        //lógica principal
+        if (alunos.length === 0) {
+            console.log("Nenhum aluno cadastrado")
+        } else {
+            let somaIdades = 0
+            //laço de repetição
+            alunos.forEach((a) => {
+                somaIdades += a[2]
+            })
+            let media = somaIdades / alunos.length
+            console.log(`Média de idade: ${media.toFixed(0)} anos`)
+        }
+
+        console.log("")
         prompt("ENTER...")
     }
 
