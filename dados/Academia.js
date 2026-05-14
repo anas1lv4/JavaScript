@@ -1,7 +1,7 @@
 /**
  * Sistema para gestão de academia
  * Estudo de array como estrutura de dados
- * @author Ana silva
+ * @author Professor José de Assis
  */
 
 //Importação de pacotes(
@@ -10,13 +10,13 @@ const prompt = require('prompt-sync')()
 //Variáveis globais
 let nome, idade, peso, altura, vip
 let matricula = 1 //contador de matrícula
-let opcaoMenu, opcaoConsulta, opcaoRelatorio
+let opcaoMenu, opcaoConsulta, opcaoRelatorio, busca
 
 //Array principal (estrutura de dados)
 let alunos = []
 /*
     Estrutura de dados:
-    [0] matricula-
+    [0] matricula
     [1] nome
     [2] idade
     [3] peso
@@ -83,20 +83,21 @@ function cadastrarAluno() {
     console.clear()
     console.log("=== CADASTRO DE ALUNO ===")
     console.log("")
-    //Logica principal
-    nome = prompt("nome: ")
-    idade = Number(prompt("idade: "))
-    peso = Number(prompt("peso: "))
-    altura = Number(prompt("Altura: "))
-    vip = prompt("Aluno VIP(s/n): ")
 
-    if (Vip = "S") {
-        Vip = true
+    //lógica principal
+    //captura dos dados
+    nome = prompt("Nome: ")
+    idade = Number(prompt("Idade: "))
+    peso = Number(prompt("Peso: "))
+    altura = Number(prompt("Altura: "))
+    vip = prompt("Aluno VIP (s/n): ")
+    if (vip === "s") {
+        vip = true
     } else {
         vip = false
     }
 
-    //Adicionar dados na matriz
+    //adicionar os dados na matriz
     alunos.push([
         matricula,
         nome,
@@ -106,7 +107,7 @@ function cadastrarAluno() {
         vip
     ])
 
-    matricula++ //auto incremento da matricula 
+    matricula++ //auto incremento da matrícula
 
     console.log("")
     console.log("Aluno cadastrado com sucesso!")
@@ -151,6 +152,37 @@ function consultarAlunos() {
         console.log("=== BUSCAR ALUNO ===")
         console.log("")
 
+        //lógica principal (busca pelo nome)
+        //.toLowerCase -> converter tudo em letras minúsculas
+        busca = prompt("Digite o nome do aluno: ").toLowerCase()
+
+        //pesquisa(filtro) na estrutura de dados
+        let encontrados = alunos.filter((a) => {
+            return a[1].toLowerCase().includes(busca)
+        })
+
+        //validação (aluno não encontrado)
+        if (encontrados.length === 0) {
+            console.log("")
+            console.log("Aluno não encontrado.")
+        } else {
+            
+            //criando um cabeçalho para tabela
+            let alunoEncontrado = encontrados
+                .map((a) => {
+                    return {
+                        Matrícula: a[0],
+                        Nome: a[1],
+                        Idade: a[2],
+                        Peso: a[3],
+                        Altura: a[4],
+                        VIP: a[5]
+                    }
+                })
+            console.table(alunoEncontrado)
+        }
+
+        console.log("")
         prompt("ENTER...")
     }
 
@@ -164,32 +196,29 @@ function consultarAlunos() {
         if (alunos.length === 0) {
             console.log("Nenhum aluno cadastrado")
         } else {
-            //console.table(alunos) 
-            //ordenar os nomes (criar copia do array)
+            //console.table(alunos)
+            //ordenar os nomes (criar cópia do array)
             let alunosOrdenados = [...alunos]
             alunosOrdenados.sort((a, z) => {
                 return a[1].localeCompare(z[1])
-
             })
-            // console.table(alunosOrdenados)
-            // criando um cabeçario para tabela
+            //console.table(alunosOrdenados)
+            //criando um cabeçalho para tabela
             let listaAlunos = alunosOrdenados
                 .map((a) => {
                     return {
-                        Matricula: a[0],
+                        Matrícula: a[0],
                         Nome: a[1],
-                        idade: a [2],
-                        Peso: a [3],
-                        Altura: a [4],
+                        Idade: a[2],
+                        Peso: a[3],
+                        Altura: a[4],
                         VIP: a[5]
-
                     }
-
                 })
-        console.table(listaAlunos)
-
+            console.table(listaAlunos)
         }
 
+        console.log("")
         prompt("ENTER...")
     }
 }
@@ -224,6 +253,73 @@ function gerarFichaAluno() {
     console.log("=== FICHA DO ALUNO ===")
     console.log("")
 
+    let buscarMatricula = Number(prompt("Digite a Matricula do aluno"))
+
+    //lógica principal (buscar o index da estrutura de dados)
+    let indice = alunos.findIndex((a) => {
+        return a[0] === buscarMatricula
+    })
+
+    //validação da busca (pelo index do array -1(vazio))
+    if (indice === -1) {
+        console.log("Aluno não enocntrado!")
+
+    } else {
+        // dados do aluno
+        nome = alunos[indice][1]
+        idade = alunos[indice][2]
+        peso = alunos[indice][3]
+        altura = alunos[indice][4]
+        vip = alunos[indice][5]
+
+
+        //status VIP
+        let statusVip
+        if (vip === true) {
+            statusVip = "sim (Direito a personal treiner"
+            
+        } else {
+            statusVip = "Não"
+        }
+
+        //calculos
+        let fcm = (208 - (0.7 * idade)).toFixed(0)
+        let agua = (peso * 35) / 1000
+        let imc = (peso / (altura * altura))
+        let pesoIdealMin = (18.5 * (altura * altura)).toFixed(1)
+        let pesoIdealMax = (24.9 * (altura * altura)).toFixed(1)
+        let statusImc
+        if (imc < 18.5) {
+            statusImc = "Abaixo do peso"
+        } else if (imc < 25) {
+            statusImc = "Peso normal"
+        } else if (imc < 30) {
+            statusImc = "SobrePeso"
+        } else if (imc < 35) {
+            statusImc = "Obesidade grau 1"
+
+        }
+
+            
+        }
+
+        //exibição
+        console.log("-------------------------------------------")
+        console.log("-             FICHA DO ALUNO              -")
+        console.log("-------------------------------------------")
+        console.log(`Matricula: ${buscarMatricula}`)            
+        console.log(`Nome: ${nome}`)
+        console.log(`idade: ${idade}`)
+        console.log(`Peso: ${peso}`)
+        console.log(`altura: ${altura}`)
+        console.log(`vip: ${statusVip}`)
+        console.log("")
+        console.log(`FCM: ${fcm} bpm`)
+        console.log(`Água recomendada: ${agua.toFixed(1)} litros/dia`)   
+        console.log(`IMC: ${imc.toFixed(2)}   
+
+    }
+    console.log("")
     prompt("ENTER...")
 }
 //Ficha do aluno (fim) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -293,28 +389,3 @@ function gerarRelatorios() {
 
 //Iniciar o sistema
 mainAcademia()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
